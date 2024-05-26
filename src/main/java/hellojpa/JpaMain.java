@@ -51,6 +51,15 @@ public class JpaMain {
             Team findTeam = findMember1.getTeam();
             System.out.println("findTeam.getName() = " + findTeam.getName());
 
+//            em.flush();
+//            em.clear();
+
+            Member findMember = em.find(Member.class, member1.getId());
+            List<Member> members = findMember.getTeam().getMembers();
+            for (Member member : members) {
+                System.out.println("member.getName() = " + member.getName());
+            }
+            System.out.println("!!!!!!");
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();

@@ -35,5 +35,7 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
+        // 연관관계 편의 메도스 - 양쪽에 다 넣어주기 위함
+        team.getMembers().add(this);
     }
 }
