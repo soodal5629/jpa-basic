@@ -15,14 +15,14 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-            
+            /*
             Member findMember = em.find(Member.class, 1L);
             System.out.println("findMember = " + findMember.getName());
             // update
             findMember.setName("updatedHellooA");
             // em.remove(findMember); -> 삭제
             Member member = new Member();
-            member.setId(101L);
+            //member.setId(101L);
             member.setName("HelloD");
             // 영속 상태가 되는데 befor/after 주석 사이에 before와 after 주석 사이에 아무런 sql도 찍히지 않고 추후에 insert 문이 찍힌다!
             System.out.println("==== BEFORE ====");
@@ -38,13 +38,27 @@ public class JpaMain {
                     .getResultList();
             for (Member memberEntity : resultList) {
                 System.out.println("member = " + memberEntity.getName());
-            }
+            }*/
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
+            Member member1 = new Member();
+            member1.setName("member1");
+            member1.setTeam(team);
+            em.persist(member1);
+            Member findMember1 = em.find(Member.class, member1.getId());
+            Team findTeam = findMember1.getTeam();
+            System.out.println("findTeam.getName() = " + findTeam.getName());
+
             tx.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             tx.rollback();
         } finally {
             em.close(); // EntityManager가 내부적으로 데이너 커넥션을 물고 동작하기 때문에 반드시 닫아줘야 한다.
+            emf.close();
         }
-        emf.close();
+        //emf.close();
     }
 }
