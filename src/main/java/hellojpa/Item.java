@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
-public class Item {
+public abstract class Item {
     @Id @GeneratedValue
     @Column(name = "ITEM_ID")
     private Long id;
