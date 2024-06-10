@@ -60,6 +60,11 @@ public class JpaMain {
                 System.out.println("member.getName() = " + member.getName());
             }
             System.out.println("!!!!!!");
+            em.flush();
+            em.clear();
+
+            List<Member> resultList = em.createQuery("select m from Member m", Member.class).getResultList();
+
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
