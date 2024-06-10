@@ -63,8 +63,15 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            List<Member> resultList = em.createQuery("select m from Member m", Member.class).getResultList();
+            // 즉시 로딩할 경우 해당 쿼리에서 n+1 문제 발생
+            //List<Member> resultList = em.createQuery("select m from Member m", Member.class).getResultList();
+            Child child1 = new Child();
+            Child child2 = new Child();
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
 
+            em.persist(parent);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
