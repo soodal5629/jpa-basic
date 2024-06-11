@@ -16,9 +16,18 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
-    private String city;
-    private String street;
-    private String zipcode;
+    @Embedded
+    private Period workPeriod;
+    @Embedded
+    private Address homeAaddress;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "city", column = @Column(name = "WORK_CITY")),
+            @AttributeOverride(name = "street", column = @Column(name = "WORK_STREET")),
+            @AttributeOverride(name = "zipcode", column = @Column(name = "WORK_ZIPCODE"))
+    })
+    private Address workAddress;
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
