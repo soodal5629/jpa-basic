@@ -50,6 +50,20 @@ public class JpaMain {
             Member findMember1 = em.find(Member.class, member1.getId());
             Team findTeam = findMember1.getTeam();
             System.out.println("findTeam.getName() = " + findTeam.getName());
+            member1.setHomeAddress(new Address("homeCity", "street1", "10000"));
+            // 값 타입 컬렉션
+            member1.getFavoriteFoods().add("치킨");
+            member1.getFavoriteFoods().add("족발");
+
+            member1.getAddressHistory().add(new Address("old1", "street1", "10000"));
+            member1.getAddressHistory().add(new Address("old2", "street1", "10000"));
+
+            // 값 타입 컬렉셕 수정 (치킨 -> 한식)
+            member1.getFavoriteFoods().remove("치킨");
+            member1.getFavoriteFoods().add("한식");
+
+            member1.getAddressHistory().remove(new Address("old1","street1", "10000"));
+            member1.getAddressHistory().add(new Address("newCity1","street1", "10000"));
 
 //            em.flush();
 //            em.clear();
