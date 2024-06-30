@@ -92,4 +92,12 @@ public class Member extends BaseEntity {
         // 연관관계 편의 메도스 - 양쪽에 다 넣어주기 위함
         team.getMembers().add(this);
     }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

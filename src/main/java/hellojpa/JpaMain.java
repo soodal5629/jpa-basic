@@ -85,6 +85,15 @@ public class JpaMain {
             parent.addChild(child1);
             parent.addChild(child2);
 
+            // 페이징 처리
+            List<Member> resultList = em.createQuery("select m from Member m order by m.id desc", Member.class)
+                    .setFirstResult(0)
+                    .setMaxResults(10)
+                    .getResultList();
+            System.out.println("result.size = " + resultList.size());
+            for (Member member : resultList) {
+                System.out.println("find member = " + member);
+            }
             em.persist(parent);
             tx.commit();
         } catch (Exception e) {

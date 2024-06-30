@@ -31,6 +31,18 @@ public class Order {
     @JoinColumn(name = "DELIVERY_ID") // 연관 관계 주인
     private Delivery delivery;
 
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_ID")
+    private Product product;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     public Long getId() {
         return id;
     }
